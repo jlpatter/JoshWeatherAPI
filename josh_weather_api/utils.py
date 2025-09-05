@@ -1,10 +1,12 @@
 from requests import Response
 
 
+class StatusCodeException(Exception):
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
+
 def check_status_code(resp: Response):
     if resp.status_code != 200:
-        return (
-            f"HTTP Status 500: Received unexpected status from {resp.request.url}, status was {resp.status_code}",
-            500,
-        )
-    return None
+        raise StatusCodeException(f"Received unexpected status from {resp.request.url}, status was {resp.status_code}")
