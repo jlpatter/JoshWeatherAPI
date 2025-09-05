@@ -9,4 +9,6 @@ class StatusCodeException(Exception):
 
 def check_status_code(resp: Response):
     if resp.status_code != 200:
-        raise StatusCodeException(f"Received unexpected status from {resp.request.url}, status was {resp.status_code}")
+        raise StatusCodeException(
+            f"Received unexpected status from {resp.request.url}, status was {resp.status_code}"
+        )
