@@ -1,25 +1,11 @@
 import json
 
 import requests
-from flask import Flask, request
+from flask import request
 
-from flaskr.models import db, Requests
-
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///./base_db.db"
-db.init_app(app)
-
-with app.app_context():
-    db.create_all()
-
-
-def check_status_code(resp):
-    if resp.status_code != 200:
-        return (
-            f"HTTP Status 500: Received unexpected status from {resp.request.url}, status was {resp.status_code}",
-            500,
-        )
-    return None
+from josh_weather_api import app
+from josh_weather_api.models import Requests, db
+from josh_weather_api.utils import check_status_code
 
 
 @app.route("/")
@@ -62,7 +48,3 @@ def weather_at_location():
     print(db.session.query(Requests).all())
 
     return result
-
-
-if __name__ == "__main__":
-    app.run()
