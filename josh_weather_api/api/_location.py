@@ -1,6 +1,7 @@
 import json
 
 import requests
+from cachetools import cached, TTLCache
 from flask import request
 
 from josh_weather_api import app
@@ -8,8 +9,14 @@ from josh_weather_api.models import Request, RequestPublicAPIRequest
 from josh_weather_api.utils import check_status_code, StatusCodeException
 
 
+# Cache responses for 15 minutes
+@cached(cache=TTLCache(maxsize=1024, ttl=900))
+def _get_from_cache_or_api(url):
+    return requests.get(url)
+
+
 def _get_from_public_api(url, request_instance):
-    resp = requests.get(url)
+    resp = _get_from_cache_or_api(url)
     pub_api_req_instance = RequestPublicAPIRequest(
         request=request_instance, request_url=url, status_code=resp.status_code
     )
