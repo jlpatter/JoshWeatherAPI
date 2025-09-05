@@ -1,5 +1,3 @@
-import json
-
 from flask import request
 from sqlalchemy import desc
 
@@ -13,6 +11,6 @@ def requests():
 
     result = []
     for r in Request.query.order_by(desc(Request.requested_at)).limit(limit).all():
-        result.append(r.to_json())
+        result.append(r.to_dict())
 
     return result
