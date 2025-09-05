@@ -32,11 +32,13 @@ class Request(db.Model, BaseModel):
 
     def to_json(self):
         # I know there's probably a cleaner more abstract way to do this, but I'm going with this for now.
-        return json.dumps({
-            "request_url": self.request_url,
-            "status_code": self.status_code,
-            "requested_at": str(self.requested_at),
-        })
+        return json.dumps(
+            {
+                "request_url": self.request_url,
+                "status_code": self.status_code,
+                "requested_at": str(self.requested_at),
+            }
+        )
 
 
 class RequestPublicAPIRequest(db.Model, BaseModel):
@@ -49,8 +51,10 @@ class RequestPublicAPIRequest(db.Model, BaseModel):
     status_code: Mapped[int] = mapped_column(db.Integer)
 
     def to_json(self):
-        return json.dumps({
-            "request": self.request.to_json(),
-            "request_url": self.request_url,
-            "status_code": self.status_code,
-        })
+        return json.dumps(
+            {
+                "request": self.request.to_json(),
+                "request_url": self.request_url,
+                "status_code": self.status_code,
+            }
+        )
