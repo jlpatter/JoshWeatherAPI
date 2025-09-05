@@ -8,7 +8,8 @@
 
 ## Developer Setup
 
-1. Create a python virtualenv (E.g. `python -m .venv .`) and activate it (E.g. `source .venv/bin/activate`)
-2. Install python requirements (E.g. `pip install -r requirements.txt`).
-3. Make sure to set your `FLASK_APP` env variable (E.g. `export FLASK_APP=josh_weather_api.app`)
-4. Run `flask run` to run the project locally.
+1. Make sure you have "Docker" and "Docker Compose" installed and either have docker desktop running or a docker daemon.
+2. Create a `.env` file in the root of the project and include the following env variables of your choosing: `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB`
+3. Run `docker compose build`
+4. Run `docker compose up`
+5. You should be able to access the site from port `5000`.

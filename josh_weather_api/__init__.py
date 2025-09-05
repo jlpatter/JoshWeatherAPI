@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_caching import Cache
 
@@ -7,7 +9,7 @@ from josh_weather_api.models import db
 
 app = Flask(__name__)
 config = {
-    "SQLALCHEMY_DATABASE_URI": "sqlite:///./base_db.db",
+    "SQLALCHEMY_DATABASE_URI": os.environ.get("DATABASE_URL"),
     "DEBUG": True,
     "CACHE_TYPE": "SimpleCache",
     "CACHE_DEFAULT_TIMEOUT": 300,

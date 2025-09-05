@@ -1,5 +1,6 @@
 .idea/
 .venv/
+.env
 
 # Everything below here was taken from Flask's tutorial: https://flask.palletsprojects.com/en/stable/tutorial/layout/#id2
 *.pyc
