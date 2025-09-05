@@ -1,11 +1,13 @@
-from flask import request
+from flask import request, Blueprint
 from sqlalchemy import desc
 
-from josh_weather_api import app
 from josh_weather_api.models import Request
 
 
-@app.route("/requests")
+bp = Blueprint("requests", __name__, url_prefix="/")
+
+
+@bp.route("/requests")
 def requests():
     limit = request.args.get("limit", default=500)
 

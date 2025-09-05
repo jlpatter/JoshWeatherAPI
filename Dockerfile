@@ -18,4 +18,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 COPY . .
-CMD ["flask", "run", "--debug"]
+CMD ["flask", "--app", "josh_weather_api", "run", "--debug"]

@@ -1,11 +1,14 @@
 import json
 
 import requests
-from flask import request
+from flask import request, Blueprint
 
 from josh_weather_api import app, cache
 from josh_weather_api.models import Request, RequestPublicAPIRequest
 from josh_weather_api.utils import check_status_code, StatusCodeException
+
+
+bp = Blueprint("location", __name__, url_prefix="/")
 
 
 def _get_from_public_api(url, request_instance):
@@ -18,7 +21,7 @@ def _get_from_public_api(url, request_instance):
     return json.loads(resp.text)
 
 
-@app.route("/")
+@bp.route("/")
 @cache.cached(timeout=300)
 def weather_at_location():
     # TODO: Need to not use '.save()' and commit everything in 1 transaction!

@@ -35,7 +35,9 @@ class Request(db.Model, BaseModel):
             "request_url": self.request_url,
             "status_code": self.status_code,
             "requested_at": str(self.requested_at),
-            "request_public_api_requests": [r.to_dict() for r in self.request_public_api_requests],
+            "request_public_api_requests": [
+                r.to_dict() for r in self.request_public_api_requests
+            ],
         }
 
 
