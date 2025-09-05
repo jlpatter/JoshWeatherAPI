@@ -1,0 +1,4 @@
+Flask~=3.1.2
+
+# Development packages. Ideally these would be in a separate requirements file.
+ruff~=0.12.12
