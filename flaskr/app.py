@@ -3,7 +3,14 @@ import json
 import requests
 from flask import Flask, request
 
+from flaskr.models import db, Requests
+
 app = Flask(__name__)
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///./base_db.db"
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 
 def check_status_code(resp):
@@ -47,6 +54,12 @@ def weather_at_location():
         for p in resp_json["properties"]["periods"]
         if p["name"] in ("Today", "Tonight")
     ]
+
+    request_instance = Requests(status_code=200)
+    db.session.add(request_instance)
+    db.session.commit()
+
+    print(db.session.query(Requests).all())
 
     return result
 

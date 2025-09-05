@@ -1,5 +1,7 @@
 Flask~=3.1.2
+Flask-SQLAlchemy~=3.1.1
 requests~=2.32.5
+SQLAlchemy~=2.0.43
 
 # Development packages. Ideally these would be in a separate requirements file.
 ruff~=0.12.12
