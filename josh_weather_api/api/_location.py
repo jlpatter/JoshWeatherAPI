@@ -22,7 +22,7 @@ def _get_from_public_api(url, request_instance):
 
 
 @bp.route("/")
-@cache.cached(timeout=300)
+@cache.cached(timeout=300, query_string=True)
 def weather_at_location():
     # TODO: Need to not use '.save()' and commit everything in 1 transaction!
     request_instance = Request(request_url=request.url)
